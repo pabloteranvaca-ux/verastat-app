@@ -10,7 +10,7 @@ import unicodedata
 
 st.set_page_config(
     page_title="Chequea360",
-    page_icon="🔎",
+    page_icon="📊",
     layout="wide"
 )
 
