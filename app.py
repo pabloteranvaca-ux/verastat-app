@@ -51,6 +51,7 @@ def fetch_worldbank_data(country_code, indicator_code):
         rows = []
 
         for item in data[1]:
+
             if item.get("value") is not None:
 
                 rows.append({
@@ -103,6 +104,7 @@ st.markdown("""
 .header-subtitle {
     font-size: 1.1rem;
     opacity: 0.95;
+    margin-top: 0.5rem;
 }
 
 .badge {
@@ -158,6 +160,7 @@ st.markdown("""
     border-radius: 12px;
     border: none;
     font-weight: 800;
+    height: 50px;
 }
 
 .stButton > button:hover {
@@ -178,19 +181,27 @@ with col_logo:
     st.image("logo.png", width=260)
 
 with col_text:
-    st.markdown("""
-    <div class="header-box">
-        <div class="header-title">Chequea360</div>
 
-        <div class="header-subtitle">
-            Plataforma de inteligencia informativa impulsada por Ecuador Chequea y ChequeaLab.
-        </div>
+    st.markdown(
+        """
+        <div class="header-box">
 
-        <div class="badge">
-            10 años chequeando · Periodismo con rigor · Datos verificables
+            <div class="header-title">
+                Chequea360
+            </div>
+
+            <div class="header-subtitle">
+                Plataforma de inteligencia informativa impulsada por Ecuador Chequea y ChequeaLab.
+            </div>
+
+            <div class="badge">
+                10 años chequeando · Periodismo con rigor · Datos verificables
+            </div>
+
         </div>
-    </div>
-    """, unsafe_allow_html=True)
+        """,
+        unsafe_allow_html=True
+    )
 
 # =========================================================
 # INTRO
@@ -198,7 +209,8 @@ with col_text:
 
 st.markdown("""
 <div class="card">
-<strong>Haz preguntas en español, inglés o portugués.</strong><br>
+
+<strong>Haz preguntas en español, inglés o portugués.</strong><br><br>
 
 <span class="small-muted">
 Ejemplos:
@@ -207,6 +219,7 @@ Compara desempleo entre Ecuador y Colombia ·
 What is unemployment in South America? ·
 Qual é a inflação na América Latina?
 </span>
+
 </div>
 """, unsafe_allow_html=True)
 
@@ -255,7 +268,7 @@ COUNTRIES = {
 }
 
 # =========================================================
-# ALIASES
+# COUNTRY ALIASES
 # =========================================================
 
 COUNTRY_ALIASES = {
@@ -462,41 +475,11 @@ INDICATORS = {
     "gdp": {
         "code": "NY.GDP.MKTP.KD.ZG",
         "name": "GDP growth"
-    },
-
-    "esperanza de vida": {
-        "code": "SP.DYN.LE00.IN",
-        "name": "Esperanza de vida"
-    },
-
-    "life expectancy": {
-        "code": "SP.DYN.LE00.IN",
-        "name": "Life expectancy"
-    },
-
-    "expectativa de vida": {
-        "code": "SP.DYN.LE00.IN",
-        "name": "Expectativa de vida"
-    },
-
-    "mortalidad infantil": {
-        "code": "SP.DYN.IMRT.IN",
-        "name": "Mortalidad infantil"
-    },
-
-    "infant mortality": {
-        "code": "SP.DYN.IMRT.IN",
-        "name": "Infant mortality"
-    },
-
-    "mortalidade infantil": {
-        "code": "SP.DYN.IMRT.IN",
-        "name": "Mortalidade infantil"
     }
 }
 
 # =========================================================
-# LANG
+# LANGUAGE
 # =========================================================
 
 def detect_language(q):
@@ -527,6 +510,7 @@ def detect_language(q):
 def labels(lang):
 
     if lang == "en":
+
         return {
             "answer": "Answer",
             "source": "Source and traceability",
@@ -539,6 +523,7 @@ def labels(lang):
         }
 
     if lang == "pt":
+
         return {
             "answer": "Resposta",
             "source": "Fonte e rastreabilidade",
@@ -562,13 +547,17 @@ def labels(lang):
     }
 
 # =========================================================
-# QUERY
+# BUTTON
 # =========================================================
 
 submitted = st.button(
     "🔎 Consultar datos",
     use_container_width=True
 )
+
+# =========================================================
+# PROCESS
+# =========================================================
 
 if submitted:
 
@@ -581,9 +570,7 @@ if submitted:
     selected_indicator = None
     selected_countries = []
 
-    # ---------------------------
     # indicator
-    # ---------------------------
 
     for key, indicator in INDICATORS.items():
 
@@ -591,9 +578,7 @@ if submitted:
             selected_indicator = indicator
             break
 
-    # ---------------------------
-    # region
-    # ---------------------------
+    # regions
 
     for region_key in sorted(REGIONS.keys(), key=len, reverse=True):
 
@@ -601,9 +586,7 @@ if submitted:
             selected_countries = REGIONS[region_key]
             break
 
-    # ---------------------------
     # countries
-    # ---------------------------
 
     if not selected_countries:
 
@@ -619,12 +602,15 @@ if submitted:
     # =====================================================
 
     if not q:
+
         st.warning("Por favor escribe una pregunta.")
 
     elif selected_indicator is None:
+
         st.error(L["no_indicator"])
 
     elif not selected_countries:
+
         st.error(L["no_geo"])
 
     else:
@@ -789,7 +775,7 @@ if submitted:
             )
 
             # =================================================
-            # TABLE + TRACEABILITY
+            # DATA
             # =================================================
 
             col1, col2 = st.columns([1, 1])
