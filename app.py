@@ -83,13 +83,22 @@ def fetch_global_ranking(indicator_code):
         df = fetch_worldbank_data(country["code"], indicator_code)
 
         if not df.empty:
-            latest = df.iloc[-1]
-            rows.append({
-                "country": country["name"],
-                "code": country["code"],
-                "year": int(latest["year"]),
-                "value": float(latest["value"])
-            })
+
+    latest = df.iloc[-1]
+
+    try:
+
+        value = float(latest["value"])
+
+        rows.append({
+            "country": country["name"],
+            "code": country["code"],
+            "year": int(latest["year"]),
+            "value": value
+        })
+
+    except:
+        pass
 
     ranking_df = pd.DataFrame(rows)
 
