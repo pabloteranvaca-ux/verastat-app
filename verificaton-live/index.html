@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Verificatón Universitario 2026</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body{
+      background: linear-gradient(90deg,#020b24,#06143d,#020b24);
+      color:white;
+      min-height:100vh;
+    }
+
+    header{
+      text-align:center;
+      padding:40px 20px 20px;
+      border-bottom:2px solid #f5a000;
+    }
+
+    .logo{
+      width:220px;
+      margin-bottom:15px;
+    }
+
+    h1{
+      font-size:42px;
+      margin-bottom:10px;
+    }
+
+    .sub{
+      color:#d0d0d0;
+      margin-bottom:15px;
+    }
+
+    .badge{
+      display:inline-block;
+      background:#ff2e63;
+      color:white;
+      padding:8px 18px;
+      border-radius:30px;
+      font-size:13px;
+      font-weight:bold;
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+      gap:20px;
+      max-width:900px;
+      margin:40px auto 20px;
+      padding:0 20px;
+    }
+
+    .stat-card{
+      background:#13224d;
+      border:1px solid rgba(255,255,255,.1);
+      border-radius:16px;
+      padding:25px;
+      text-align:center;
+      box-shadow:0 8px 20px rgba(0,0,0,.3);
+    }
+
+    .stat-card h2{
+      color:#ffb000;
+      font-size:40px;
+      margin-bottom:10px;
+    }
+
+    .stat-card p{
+      color:#ccc;
+      font-size:14px;
+      text-transform:uppercase;
+      letter-spacing:1px;
+    }
+
+    .categorias{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+      gap:10px;
+      max-width:900px;
+      margin:20px auto 40px;
+      padding:0 20px;
+    }
+
+    .categoria{
+      padding:14px;
+      border-radius:10px;
+      text-align:center;
+      font-weight:bold;
+      font-size:14px;
+    }
+
+    .falso{ background:#e53935; }
+    .enganoso{ background:#f5a000; }
+    .verdadero{ background:#10b981; }
+    .satira{ background:#9333ea; }
+    .inverificable{ background:#333; }
+
+    .titulo-seccion{
+      text-align:center;
+      margin-bottom:30px;
+      font-size:26px;
+    }
+
+    #cards{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:25px;
+      max-width:1400px;
+      margin:0 auto;
+      padding:0 30px 60px;
+    }
+
+    .card{
+      background:#13224d;
+      border-radius:18px;
+      padding:24px;
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:0 8px 25px rgba(0,0,0,.35);
+    }
+
+    .card h3{
+      margin-bottom:18px;
+      font-size:22px;
+      color:white;
+    }
+
+    .line{
+      height:1px;
+      background:rgba(255,255,255,.1);
+      margin:14px 0;
+    }
+
+    .item{
+      margin:10px 0;
+      color:#ddd;
+      font-size:15px;
+    }
+
+    .item span{
+      font-weight:bold;
+      color:white;
+    }
+
+    footer{
+      text-align:center;
+      padding:40px 20px;
+      color:#aaa;
+      border-top:1px solid rgba(255,255,255,.1);
+      margin-top:40px;
+    }
+
+    @media(max-width:768px){
+
+      h1{
+        font-size:30px;
+      }
+
+      .logo{
+        width:160px;
+      }
+
+      .stats{
+        grid-template-columns:1fr 1fr;
+      }
+
+      .categorias{
+        grid-template-columns:1fr 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+
+  <img src="logo.png" alt="Ecuador Chequea" class="logo">
+
+  <h1>Verificatón Universitario 2026</h1>
+
+  <p class="sub">
+    Marcador en vivo de verificaciones realizadas por universidades participantes.
+  </p>
+
+  <div class="badge">
+    ● ACTUALIZÁNDOSE EN TIEMPO REAL
+  </div>
+
+</header>
+
+<section class="stats">
+
+  <div class="stat-card">
+    <h2 id="subidos">0</h2>
+    <p>Docs Subidos</p>
+  </div>
+
+  <div class="stat-card">
+    <h2 id="aprobados">0</h2>
+    <p>Aprobados</p>
+  </div>
+
+  <div class="stat-card">
+    <h2 id="pendientes">0</h2>
+    <p>Pendientes</p>
+  </div>
+
+  <div class="stat-card">
+    <h2 id="universidades">0</h2>
+    <p>Universidades</p>
+  </div>
+
+</section>
+
+<section class="categorias">
+
+  <div class="categoria falso">
+    Falso <span id="falsos">0</span>
+  </div>
+
+  <div class="categoria enganoso">
+    Engañoso <span id="enganosos">0</span>
+  </div>
+
+  <div class="categoria verdadero">
+    Verdadero <span id="verdaderos">0</span>
+  </div>
+
+  <div class="categoria satira">
+    Sátira <span id="satiras">0</span>
+  </div>
+
+  <div class="categoria inverificable">
+    Inverificable <span id="inverificables">0</span>
+  </div>
+
+</section>
+
+<h2 class="titulo-seccion">
+  Universidades Participantes
+</h2>
+
+<section id="cards"></section>
+
+<footer>
+  Ecuador Chequea · Periodismo con rigor · Verificatón 2026
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>

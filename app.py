@@ -388,7 +388,7 @@ Chequea360 permite buscar, comparar e interpretar datos oficiales del Banco Mund
 
 question = st.text_input(
     "Pregunta",
-    placeholder="Ejemplo: Ecuador pobreza · Inflación en América Latina · Compara desempleo entre Ecuador y Colombia · Alemania inflación · ¿Cuál es el PIB de Japón? · Ranking mundial de inflación · Germany GDP · Global ranking of unemployment",
+    placeholder="Escribe tu pregunta aquí:" 
     label_visibility="collapsed"
 )
 

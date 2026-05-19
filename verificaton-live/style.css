@@ -1,0 +1,478 @@
+:root{
+  --azul:#1B2A6B;
+  --azul2:#111E4E;
+  --naranja:#F5A623;
+  --fondo:#0E1628;
+  --card:#162038;
+  --linea:#24324f;
+  --blanco:#fff;
+  --gris:#a8b3cf;
+  --falso:#E53935;
+  --enganoso:#FF8A00;
+  --verdadero:#00C896;
+  --satira:#A855F7;
+  --inverificable:#111;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+
+  background:
+    radial-gradient(
+      circle at top,
+      #1b2a6b 0,
+      #0e1628 45%,
+      #070b14 100%
+    );
+
+  color:var(--blanco);
+
+  font-family:Arial,sans-serif;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+
+  width:100%;
+
+  display:flex;
+  flex-direction:column;
+
+  align-items:center;
+  justify-content:center;
+
+  text-align:center;
+
+  padding:60px 20px 40px;
+
+  border-bottom:3px solid var(--naranja);
+}
+
+/* =========================
+   LOGO
+========================= */
+
+.logo{
+  width:620px !important;
+  max-width:90% !important;
+  height:auto !important;
+  display:block !important;
+  margin:0 auto 20px auto !important;
+  object-fit:contain !important;
+}
+
+/* =========================
+   EYEBROW
+========================= */
+
+.eyebrow{
+  color:var(--naranja);
+
+  text-transform:uppercase;
+
+  letter-spacing:3px;
+
+  font-size:12px;
+
+  font-weight:bold;
+}
+
+/* =========================
+   TITULO
+========================= */
+
+.hero h1{
+
+  font-size:58px;
+
+  margin:10px 0;
+
+  line-height:1;
+}
+
+/* =========================
+   SUBTITULO
+========================= */
+
+.hero p{
+
+  color:var(--gris);
+
+  margin:0 auto;
+
+  max-width:700px;
+
+  line-height:1.5;
+}
+
+/* =========================
+   LIVE BADGE
+========================= */
+
+.live{
+
+  display:inline-block;
+
+  margin-top:18px;
+
+  padding:10px 20px;
+
+  border-radius:999px;
+
+  background:
+    rgba(229,57,53,.14);
+
+  color:#ff7a7a;
+
+  border:
+    1px solid rgba(229,57,53,.4);
+
+  font-size:13px;
+
+  font-weight:bold;
+
+  letter-spacing:1px;
+
+  text-transform:uppercase;
+
+  box-shadow:
+    0 0 20px rgba(255,59,107,.2);
+
+  animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+
+  0%{
+    transform:scale(1);
+  }
+
+  50%{
+    transform:scale(1.03);
+  }
+
+  100%{
+    transform:scale(1);
+  }
+
+}
+
+/* =========================
+   CONTAINER
+========================= */
+
+.container{
+  max-width:1400px;
+
+  margin:0 auto;
+
+  padding:40px 20px 60px;
+}
+
+/* =========================
+   STATS
+========================= */
+
+.stats{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(4,1fr);
+
+  gap:18px;
+
+  margin-bottom:24px;
+}
+
+.stat{
+
+  background:var(--card);
+
+  border:
+    1px solid var(--linea);
+
+  border-radius:20px;
+
+  padding:30px 20px;
+
+  text-align:center;
+
+  box-shadow:
+    0 14px 30px rgba(0,0,0,.22);
+
+  transition:.25s;
+}
+
+.stat:hover{
+  transform:translateY(-4px);
+}
+
+.stat span{
+
+  display:block;
+
+  color:var(--naranja);
+
+  font-size:64px;
+
+  font-weight:900;
+
+  line-height:1;
+}
+
+.stat p{
+
+  color:var(--gris);
+
+  margin:8px 0 0;
+
+  font-size:12px;
+
+  text-transform:uppercase;
+
+  letter-spacing:1px;
+
+  font-weight:bold;
+}
+
+/* =========================
+   VEREDICTOS
+========================= */
+
+.veredictos{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(5,1fr);
+
+  gap:12px;
+
+  margin:10px 0 40px;
+}
+
+.chip{
+
+  border-radius:14px;
+
+  padding:16px;
+
+  font-weight:bold;
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  color:white;
+
+  box-shadow:
+    0 8px 20px rgba(0,0,0,.2);
+}
+
+.chip strong{
+  font-size:28px;
+}
+
+.chip.falso{
+  background:var(--falso);
+}
+
+.chip.enganoso{
+  background:var(--enganoso);
+}
+
+.chip.verdadero{
+  background:var(--verdadero);
+}
+
+.chip.satira{
+  background:var(--satira);
+}
+
+.chip.inverificable{
+  background:#333;
+}
+
+/* =========================
+   SECTION TITLE
+========================= */
+
+.section-title{
+
+  margin:40px 0 22px;
+
+  font-size:18px;
+
+  color:var(--naranja);
+
+  text-transform:uppercase;
+
+  letter-spacing:2px;
+
+  text-align:center;
+}
+
+/* =========================
+   CARDS
+========================= */
+
+.cards{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(auto-fit,minmax(300px,1fr));
+
+  gap:20px;
+
+  justify-content:center;
+}
+
+/* =========================
+   CARD
+========================= */
+
+.card{
+
+  background:
+    rgba(22,32,56,.96);
+
+  border:
+    1px solid var(--linea);
+
+  border-radius:20px;
+
+  padding:22px;
+
+  box-shadow:
+    0 12px 35px rgba(0,0,0,.28);
+
+  min-height:280px;
+
+  transition:.25s;
+}
+
+.card:hover{
+  transform:translateY(-5px);
+}
+
+.card h2{
+
+  font-size:22px;
+
+  margin:0 0 14px;
+
+  color:white;
+}
+
+.card hr{
+
+  border:0;
+
+  border-top:
+    1px solid var(--linea);
+
+  margin:14px 0;
+}
+
+.card p{
+
+  margin:9px 0;
+
+  color:#d8def0;
+
+  font-size:15px;
+}
+
+.card strong{
+  color:white;
+}
+
+.card a{
+
+  display:inline-block;
+
+  margin-top:14px;
+
+  color:var(--naranja);
+
+  text-decoration:none;
+
+  font-weight:bold;
+
+  border:
+    1px solid rgba(245,166,35,.4);
+
+  padding:8px 12px;
+
+  border-radius:8px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+
+  max-width:1400px;
+
+  margin:0 auto;
+
+  padding:22px 20px 40px;
+
+  color:var(--gris);
+
+  font-size:12px;
+
+  border-top:
+    1px solid var(--linea);
+
+  text-align:center;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:900px){
+
+  .stats{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .veredictos{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .hero h1{
+    font-size:42px;
+  }
+
+}
+
+@media(max-width:520px){
+
+  .stats,
+  .veredictos{
+    grid-template-columns:1fr;
+  }
+
+  .hero h1{
+    font-size:34px;
+  }
+
+  .logo{
+    width:320px;
+  }
+
+}
