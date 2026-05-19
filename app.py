@@ -388,7 +388,7 @@ Chequea360 permite buscar, comparar e interpretar datos oficiales del Banco Mund
 
 question = st.text_input(
     "Pregunta",
-    placeholder="Escribe tu pregunta aquí:" 
+    placeholder="Escribe tu pregunta aquí:",
     label_visibility="collapsed"
 )
 
