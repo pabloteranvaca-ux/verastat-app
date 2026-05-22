@@ -607,16 +607,17 @@ def mostrar_compartir(question):
 
     import urllib.parse
 
-    base_url = "https://chequea360.streamlit.app"
+    base_url = "https://chequea360.streamlit.app/"
 
     pregunta = question.strip()
 
     share_url = (
     base_url
-    + "/?q="
+    + "?q="
     + urllib.parse.quote(pregunta)
     + "&embed=1"
 )
+
 
     embed_code = f"""
 <iframe
