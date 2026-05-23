@@ -2,7 +2,7 @@ import streamlit as st
 import plotly.express as px
 import pandas as pd
 import requests
-import unicodedata
+from data360_client import get_indicator_metadata, render_trace_card
 
 # =========================================================
 # CONFIG
@@ -856,16 +856,14 @@ if submitted:
                     st.dataframe(ranking_df)
 
             with col2:
-                st.markdown(f"""
-                <div class="trace-card">
-                <h4>🔎 {L["source"]}</h4>
-                <p><strong>Fuente:</strong> Banco Mundial</p>
-                <p><strong>Indicador:</strong> {selected_indicator['name']}</p>
-                <p><strong>Código:</strong> {selected_indicator['code']}</p>
-                <p><strong>Tipo de consulta:</strong> Ranking global de países</p>
-                <p><a href="https://data.worldbank.org/" target="_blank">World Bank Open Data</a></p>
-                </div>
-                """, unsafe_allow_html=True)
+                                st.markdown(
+                        render_trace_card(
+                            indicator_code=selected_indicator["code"],
+                            countries=[c["name"] for c in selected_countries],
+                            lang=lang
+                        ),
+                        unsafe_allow_html=True
+                    )
 
     else:
 
@@ -1039,16 +1037,14 @@ if submitted:
                 with col2:
                     countries_text = ", ".join([country["name"] for country in selected_countries])
 
-                    st.markdown(f"""
-                    <div class="trace-card">
-                    <h4>🔎 {L["source"]}</h4>
-                    <p><strong>Fuente:</strong> Banco Mundial</p>
-                    <p><strong>Indicador:</strong> {selected_indicator['name']}</p>
-                    <p><strong>Código:</strong> {selected_indicator['code']}</p>
-                    <p><strong>Países:</strong> {countries_text}</p>
-                    <p><a href="https://data.worldbank.org/" target="_blank">World Bank Open Data</a></p>
-                    </div>
-                    """, unsafe_allow_html=True)
+                                    st.markdown(
+                        render_trace_card(
+                            indicator_code=selected_indicator["code"],
+                            countries=["Ranking global — todos los países"],
+                            lang=lang
+                        ),
+                        unsafe_allow_html=True
+                    )
 
 if not modo_embed:
 
