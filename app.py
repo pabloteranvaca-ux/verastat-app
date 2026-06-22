@@ -10,7 +10,7 @@ from data360_client import get_indicator_metadata, render_trace_card
 # =========================================================
 
 st.set_page_config(
-    page_title="Chequea360",
+    page_title="VeraStat",
     page_icon="favicon.png",
     layout="wide"
 )
@@ -406,9 +406,9 @@ if not modo_embed:
     with col_text:
         header_html = (
             '<div class="header-box">'
-            '<div class="header-title">Chequea360</div>'
+            '<div class="header-title">VeraStat</div>'
             '<div class="header-subtitle">'
-            'Chequea360 es una plataforma de inteligencia informativa que integra inteligencia artificial, '
+            'VeraStat es una plataforma de inteligencia informativa que integra inteligencia artificial, '
             'la API Data360 del Banco Mundial, metodologías periodísticas de verificación de datos y procesos '
             'de capacitación y alfabetización en datos a través de ChequeaLab.<br><br>'
             'Su objetivo es permitir que periodistas, investigadores y ciudadanos '
@@ -433,7 +433,7 @@ Consulta indicadores económicos y sociales oficiales.
 </p>
 
 <p style="margin-top:10px; margin-bottom:8px;" class="small-muted">
-Chequea360 permite buscar, comparar e interpretar datos oficiales del Banco Mundial sobre PIB, crecimiento económico, inflación, desempleo, pobreza, desarrollo económico y social, así como comparaciones entre países, regiones y rankings globales.
+VeraStat permite buscar, comparar e interpretar datos oficiales del Banco Mundial sobre PIB, crecimiento económico, inflación, desempleo, pobreza, desarrollo económico y social, así como comparaciones entre países, regiones y rankings globales.
 </p>
 
 <p style="margin:0;" class="small-muted">
@@ -686,7 +686,7 @@ overflow:hidden;">
 
     mensaje = (
         f"{pregunta}\n\n"
-        f"Míralo en Chequea360:\n"
+        f"Míralo en VeraStat:\n"
         f"{share_url}"
     )
 
@@ -1055,6 +1055,6 @@ if not modo_embed:
 
     st.markdown("""
 <div class="footer">
-Chequea360 · Ecuador Chequea · ChequeaLab · Datos oficiales del Banco Mundial
+VeraStat · Ecuador Chequea · ChequeaLab · Datos oficiales del Banco Mundial
 </div>
 """, unsafe_allow_html=True)
