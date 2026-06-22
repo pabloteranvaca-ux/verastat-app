@@ -22,6 +22,115 @@ modo_embed = (
 )
 
 # =========================================================
+# INTERFACE LANGUAGE
+# =========================================================
+
+UI_TEXT = {
+    "es": {
+        "language_label": "Idioma",
+        "title": "VeraStat",
+        "subtitle": (
+            "VeraStat es una plataforma de inteligencia de datos que integra inteligencia artificial, "
+            "datos oficiales del Banco Mundial, metodologías periodísticas de verificación y procesos "
+            "de alfabetización de datos a través de ChequeaLab.<br><br>"
+            "Permite que periodistas, investigadores y ciudadanos consulten, interpreten y validen "
+            "indicadores económicos y sociales en tiempo real."
+        ),
+        "badge": "10 años chequeando · Periodismo con rigor · Datos verificables",
+        "intro_title": "Consulta indicadores económicos y sociales oficiales.",
+        "intro_text": (
+            "VeraStat te permite buscar, comparar e interpretar datos del Banco Mundial sobre PIB, "
+            "crecimiento económico, inflación, desempleo, pobreza y desarrollo social, con comparaciones "
+            "entre países, regiones y rankings globales."
+        ),
+        "examples": (
+            "Ejemplos: Ecuador pobreza · Inflación en América Latina · Compara desempleo entre Ecuador "
+            "y Colombia · ¿Cuál es el PIB de Japón? · Ranking mundial de inflación · Global ranking of unemployment"
+        ),
+        "placeholder": "Escribe tu pregunta aquí:",
+        "button": "📊 Consultar datos",
+        "spinner_ranking": "Construyendo ranking global con datos oficiales del Banco Mundial...",
+        "spinner_data": "Consultando datos oficiales del Banco Mundial...",
+        "empty_question": "Por favor escribe una pregunta.",
+        "share_title": "Compartir o incrustar",
+        "share_web": "Insertar en web",
+        "share_tab": "Compartir",
+        "share_label": "Mensaje",
+        "share_text": "Míralo en VeraStat:",
+    },
+    "en": {
+        "language_label": "Language",
+        "title": "VeraStat",
+        "subtitle": (
+            "VeraStat is a data intelligence platform that combines artificial intelligence, official World Bank data, "
+            "journalistic fact-checking methodologies, and data literacy programs through ChequeaLab.<br><br>"
+            "It enables journalists, researchers, and citizens to consult, interpret, and validate economic and social "
+            "indicators in real time."
+        ),
+        "badge": "10 years fact-checking · Rigorous journalism · Verifiable data",
+        "intro_title": "Query official economic and social indicators.",
+        "intro_text": (
+            "VeraStat lets you search, compare, and interpret World Bank data on GDP, economic growth, inflation, "
+            "unemployment, poverty, and social development — with country comparisons, regional analysis, and global rankings."
+        ),
+        "examples": (
+            "Examples: Ecuador poverty · Inflation in Latin America · Compare unemployment: Ecuador vs Colombia · "
+            "What is Japan's GDP? · Global inflation ranking · Global ranking of unemployment"
+        ),
+        "placeholder": "Type your question here:",
+        "button": "📊 Query data",
+        "spinner_ranking": "Building a global ranking with official World Bank data...",
+        "spinner_data": "Querying official World Bank data...",
+        "empty_question": "Please type a question.",
+        "share_title": "Share or embed",
+        "share_web": "Embed on website",
+        "share_tab": "Share",
+        "share_label": "Message",
+        "share_text": "View it on VeraStat:",
+    },
+    "pt": {
+        "language_label": "Idioma",
+        "title": "VeraStat",
+        "subtitle": (
+            "VeraStat é uma plataforma de inteligência de dados que integra inteligência artificial, dados oficiais "
+            "do Banco Mundial, metodologias jornalísticas de verificação e processos de alfabetização de dados por "
+            "meio do ChequeaLab.<br><br>"
+            "Permite que jornalistas, pesquisadores e cidadãos consultem, interpretem e validem indicadores econômicos "
+            "e sociais em tempo real."
+        ),
+        "badge": "10 anos verificando · Jornalismo rigoroso · Dados verificáveis",
+        "intro_title": "Consulte indicadores econômicos e sociais oficiais.",
+        "intro_text": (
+            "O VeraStat permite buscar, comparar e interpretar dados do Banco Mundial sobre PIB, crescimento econômico, "
+            "inflação, desemprego, pobreza e desenvolvimento social, com comparações entre países, regiões e rankings globais."
+        ),
+        "examples": (
+            "Exemplos: Pobreza no Equador · Inflação na América Latina · Compare desemprego: Equador vs Colômbia · "
+            "Qual é o PIB do Japão? · Ranking mundial de inflação · Global ranking of unemployment"
+        ),
+        "placeholder": "Escreva sua pergunta aqui:",
+        "button": "📊 Consultar dados",
+        "spinner_ranking": "Construindo ranking global com dados oficiais do Banco Mundial...",
+        "spinner_data": "Consultando dados oficiais do Banco Mundial...",
+        "empty_question": "Por favor, escreva uma pergunta.",
+        "share_title": "Compartilhar ou incorporar",
+        "share_web": "Inserir na web",
+        "share_tab": "Compartilhar",
+        "share_label": "Mensagem",
+        "share_text": "Veja no VeraStat:",
+    },
+}
+
+if "ui_lang" not in st.session_state:
+    requested_lang = params.get("lang", "es")
+    if requested_lang not in UI_TEXT:
+        requested_lang = "es"
+    st.session_state.ui_lang = requested_lang
+
+T = UI_TEXT[st.session_state.ui_lang]
+
+
+# =========================================================
 # HELPERS
 # =========================================================
 
@@ -389,6 +498,32 @@ st.markdown("""
     color: #142B6F;
 }
 
+
+.lang-selector {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+}
+
+.lang-selector a {
+    text-decoration: none !important;
+    background: white;
+    color: #142B6F !important;
+    border: 1px solid rgba(20,43,111,0.16);
+    border-radius: 999px;
+    padding: 0.35rem 0.75rem;
+    font-weight: 800;
+    font-size: 0.82rem;
+    box-shadow: 0 2px 8px rgba(20,43,111,0.06);
+}
+
+.lang-selector a.active {
+    background: #F6A300;
+    color: #142B6F !important;
+    border-color: #F6A300;
+}
+
 </style>
 """, unsafe_allow_html=True)
 
@@ -404,17 +539,20 @@ if not modo_embed:
         st.image("logo.png", width=260)
 
     with col_text:
+        lang_selector = (
+            '<div class="lang-selector">'
+            f'<a class="{ "active" if st.session_state.ui_lang == "es" else "" }" href="?lang=es">🇪🇸 Español</a>'
+            f'<a class="{ "active" if st.session_state.ui_lang == "en" else "" }" href="?lang=en">🇺🇸 English</a>'
+            f'<a class="{ "active" if st.session_state.ui_lang == "pt" else "" }" href="?lang=pt">🇧🇷 Português</a>'
+            '</div>'
+        )
+        st.markdown(lang_selector, unsafe_allow_html=True)
+
         header_html = (
             '<div class="header-box">'
-            '<div class="header-title">VeraStat</div>'
-            '<div class="header-subtitle">'
-            'VeraStat es una plataforma de inteligencia informativa que integra inteligencia artificial, '
-            'datos oficiales del Banco Mundial, metodologías periodísticas de verificación y procesos '
-            'de alfabetización de datos a través de ChequeaLab.<br><br>'
-            'Permite que periodistas, investigadores y ciudadanos consulten, interpreten y validen '
-            'indicadores económicos y sociales en tiempo real.'
-            '</div>'
-            '<div class="badge">10 años chequeando · Periodismo con rigor · Datos verificables</div>'
+            f'<div class="header-title">{T["title"]}</div>'
+            f'<div class="header-subtitle">{T["subtitle"]}</div>'
+            f'<div class="badge">{T["badge"]}</div>'
             '</div>'
         )
 
@@ -425,19 +563,19 @@ if not modo_embed:
 
 if not modo_embed:
 
-    st.markdown("""
+    st.markdown(f"""
 <div class="card">
 
 <p style="margin:0; font-size:1.05rem; font-weight:700; color:#1f1f1f;">
-Consulta indicadores económicos y sociales oficiales.
+{T["intro_title"]}
 </p>
 
 <p style="margin-top:10px; margin-bottom:8px;" class="small-muted">
-VeraStat permite buscar, comparar e interpretar datos oficiales del Banco Mundial sobre PIB, crecimiento económico, inflación, desempleo, pobreza, desarrollo económico y social, así como comparaciones entre países, regiones y rankings globales.
+{T["intro_text"]}
 </p>
 
 <p style="margin:0;" class="small-muted">
-<strong>Ejemplos:</strong> Ecuador pobreza · Inflación en América Latina · Compara desempleo entre Ecuador y Colombia · Alemania inflación · Suecia desempleo · ¿Cuál es el PIB de Japón? · Ranking mundial de inflación · Global ranking of unemployment
+<strong>{T["examples"].split(":")[0]}:</strong>{T["examples"].split(":", 1)[1] if ":" in T["examples"] else T["examples"]}
 </p>
 
 </div>
@@ -448,7 +586,7 @@ VeraStat permite buscar, comparar e interpretar datos oficiales del Banco Mundia
 
 question = st.text_input(
     "Pregunta",
-    placeholder="Escribe tu pregunta aquí:",
+    placeholder=T["placeholder"],
     label_visibility="collapsed"
 )
 
@@ -659,7 +797,7 @@ def mostrar_compartir(question):
 
     import urllib.parse
 
-    base_url = "https://chequea360.streamlit.app/"
+    base_url = "https://verastat-app.streamlit.app/"
 
     pregunta = question.strip()
 
@@ -686,15 +824,15 @@ overflow:hidden;">
 
     mensaje = (
         f"{pregunta}\n\n"
-        f"Míralo en VeraStat:\n"
+        f"{T['share_text']}\n"
         f"{share_url}"
     )
 
-    st.markdown("## Compartir o incrustar")
+    st.markdown(f"## {T['share_title']}")
 
     tab1, tab2 = st.tabs([
-        "Insertar en web",
-        "Compartir"
+        T["share_web"],
+        T["share_tab"]
     ])
 
     with tab1:
@@ -707,7 +845,7 @@ overflow:hidden;">
     with tab2:
 
         st.text_area(
-            "Mensaje",
+            T["share_label"],
             mensaje,
             height=120
         )
@@ -753,7 +891,7 @@ overflow:hidden;">
 # =========================================================
 
 submitted = st.button(
-    "📊 Consultar datos",
+    T["button"],
     use_container_width=True
 )
 
@@ -779,14 +917,14 @@ if submitted:
             break
 
     if not q:
-        st.warning("Por favor escribe una pregunta.")
+        st.warning(T["empty_question"])
 
     elif selected_indicator is None:
         st.error(L["no_indicator"])
 
     elif global_query:
 
-        with st.spinner("Construyendo ranking global con datos oficiales del Banco Mundial..."):
+        with st.spinner(T["spinner_ranking"]):
             ranking_df = fetch_global_ranking(
                 selected_indicator["code"]
             )
@@ -905,7 +1043,7 @@ if submitted:
         else:
             all_data = []
 
-            with st.spinner("Consultando datos oficiales del Banco Mundial..."):
+            with st.spinner(T["spinner_data"]):
                 for country in selected_countries:
                     df = fetch_worldbank_data(
                         country["code"],
