@@ -498,6 +498,23 @@ st.markdown("""
     color: #142B6F;
 }
 
+/* Selector de idioma de VeraStat */
+div[data-testid="stRadio"] {
+    margin-bottom: 1rem;
+}
+
+div[data-testid="stRadio"] [role="radiogroup"] {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+    div[data-testid="stRadio"] [role="radiogroup"] {
+        justify-content: center;
+    }
+}
 
 .lang-selector {
     display: flex;
@@ -539,14 +556,29 @@ if not modo_embed:
         st.image("logo.png", width=260)
 
     with col_text:
-        lang_selector = (
-            '<div class="lang-selector">'
-            f'<a class="{ "active" if st.session_state.ui_lang == "es" else "" }" href="?lang=es">🇪🇸 Español</a>'
-            f'<a class="{ "active" if st.session_state.ui_lang == "en" else "" }" href="?lang=en">🇺🇸 English</a>'
-            f'<a class="{ "active" if st.session_state.ui_lang == "pt" else "" }" href="?lang=pt">🇧🇷 Português</a>'
-            '</div>'
+        language_options = {
+            "🇪🇸 Español": "es",
+            "🇺🇸 English": "en",
+            "🇧🇷 Português": "pt",
+        }
+
+        current_lang = st.session_state.ui_lang
+        current_label = next(
+            label for label, code in language_options.items()
+            if code == current_lang
         )
-        st.markdown(lang_selector, unsafe_allow_html=True)
+
+        language_choice = st.radio(
+            "Idioma",
+            list(language_options.keys()),
+            index=list(language_options.keys()).index(current_label),
+            horizontal=True,
+            label_visibility="collapsed",
+            key="language_selector"
+        )
+
+        st.session_state.ui_lang = language_options[language_choice]
+        T = UI_TEXT[st.session_state.ui_lang]
 
         header_html = (
             '<div class="header-box">'
@@ -904,7 +936,7 @@ if submitted:
     q_original = question.strip()
     q = clean_text(q_original)
 
-    lang = detect_language(q)
+    lang = st.session_state.ui_lang
     L = labels(lang)
 
     selected_indicator = None
