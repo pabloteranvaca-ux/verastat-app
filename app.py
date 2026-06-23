@@ -127,6 +127,21 @@ if "ui_lang" not in st.session_state:
         requested_lang = "es"
     st.session_state.ui_lang = requested_lang
 
+LANG_OPTIONS = {
+    "es": "🇪🇸 Español",
+    "en": "🇺🇸 English",
+    "pt": "🇧🇷 Português",
+}
+
+st.session_state.ui_lang = st.radio(
+    "Idioma",
+    options=["es", "en", "pt"],
+    format_func=lambda code: LANG_OPTIONS[code],
+    horizontal=True,
+    label_visibility="collapsed",
+    key="verastat_language_selector",
+)
+
 T = UI_TEXT[st.session_state.ui_lang]
 
 
@@ -498,48 +513,6 @@ st.markdown("""
     color: #142B6F;
 }
 
-/* Selector de idioma de VeraStat */
-div[data-testid="stRadio"] {
-    margin-bottom: 1rem;
-}
-
-div[data-testid="stRadio"] [role="radiogroup"] {
-    display: flex;
-    justify-content: flex-end;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-}
-
-@media (max-width: 768px) {
-    div[data-testid="stRadio"] [role="radiogroup"] {
-        justify-content: center;
-    }
-}
-
-.lang-selector {
-    display: flex;
-    gap: 0.5rem;
-    justify-content: flex-end;
-    margin-bottom: 1rem;
-}
-
-.lang-selector a {
-    text-decoration: none !important;
-    background: white;
-    color: #142B6F !important;
-    border: 1px solid rgba(20,43,111,0.16);
-    border-radius: 999px;
-    padding: 0.35rem 0.75rem;
-    font-weight: 800;
-    font-size: 0.82rem;
-    box-shadow: 0 2px 8px rgba(20,43,111,0.06);
-}
-
-.lang-selector a.active {
-    background: #F6A300;
-    color: #142B6F !important;
-    border-color: #F6A300;
-}
 
 </style>
 """, unsafe_allow_html=True)
@@ -556,30 +529,6 @@ if not modo_embed:
         st.image("logo.png", width=260)
 
     with col_text:
-        language_options = {
-            "🇪🇸 Español": "es",
-            "🇺🇸 English": "en",
-            "🇧🇷 Português": "pt",
-        }
-
-        current_lang = st.session_state.ui_lang
-        current_label = next(
-            label for label, code in language_options.items()
-            if code == current_lang
-        )
-
-        language_choice = st.radio(
-            "Idioma",
-            list(language_options.keys()),
-            index=list(language_options.keys()).index(current_label),
-            horizontal=True,
-            label_visibility="collapsed",
-            key="language_selector"
-        )
-
-        st.session_state.ui_lang = language_options[language_choice]
-        T = UI_TEXT[st.session_state.ui_lang]
-
         header_html = (
             '<div class="header-box">'
             f'<div class="header-title">{T["title"]}</div>'
