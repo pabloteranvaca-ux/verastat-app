@@ -127,21 +127,6 @@ if "ui_lang" not in st.session_state:
         requested_lang = "es"
     st.session_state.ui_lang = requested_lang
 
-LANG_OPTIONS = {
-    "es": "🇪🇸 Español",
-    "en": "🇺🇸 English",
-    "pt": "🇧🇷 Português",
-}
-
-st.session_state.ui_lang = st.radio(
-    "Idioma",
-    options=["es", "en", "pt"],
-    format_func=lambda code: LANG_OPTIONS[code],
-    horizontal=True,
-    label_visibility="collapsed",
-    key="verastat_language_selector",
-)
-
 T = UI_TEXT[st.session_state.ui_lang]
 
 
@@ -514,6 +499,12 @@ st.markdown("""
 }
 
 
+.language-select-label {
+    font-weight: 800;
+    color: #142B6F;
+    margin-bottom: 0.25rem;
+}
+
 </style>
 """, unsafe_allow_html=True)
 
@@ -529,6 +520,24 @@ if not modo_embed:
         st.image("logo.png", width=260)
 
     with col_text:
+        lang_labels = {
+            "Español 🇪🇸": "es",
+            "English 🇺🇸": "en",
+            "Português 🇧🇷": "pt",
+        }
+        current_label = next(
+            label for label, code in lang_labels.items()
+            if code == st.session_state.ui_lang
+        )
+        selected_label = st.selectbox(
+            T["language_label"],
+            list(lang_labels.keys()),
+            index=list(lang_labels.keys()).index(current_label),
+            key="language_selector",
+        )
+        st.session_state.ui_lang = lang_labels[selected_label]
+        T = UI_TEXT[st.session_state.ui_lang]
+
         header_html = (
             '<div class="header-box">'
             f'<div class="header-title">{T["title"]}</div>'
@@ -1172,8 +1181,14 @@ if submitted:
 
 if not modo_embed:
 
-    st.markdown("""
+    footer_text = {
+        "es": "VeraStat · Ecuador Chequea · ChequeaLab · Datos oficiales del Banco Mundial",
+        "en": "VeraStat · Ecuador Chequea · ChequeaLab · Official World Bank data",
+        "pt": "VeraStat · Ecuador Chequea · ChequeaLab · Dados oficiais do Banco Mundial",
+    }[st.session_state.ui_lang]
+
+    st.markdown(f"""
 <div class="footer">
-VeraStat · Ecuador Chequea · ChequeaLab · Datos oficiales del Banco Mundial
+{footer_text}
 </div>
 """, unsafe_allow_html=True)
